@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
@@ -30,7 +34,38 @@ body {
 	place-items: center;
 	min-width: 320px;
 	min-height: 100vh;
-	background-color: oklch(86% 0.089 223.41)
+	background-color: oklch(0.826 0.007 219.572)
+}
+
+#root {
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	text-align: center;
+	padding: 30px;
+	margin: 50px 0;
+	border-radius: 20px;
+	background-color: oklch(0.72 0.094 177.563);
+}
+
+.todo_container {
+	background-color: oklch(0.878 0.002 17.2);
+	border-radius: 20px;
+	max-width: 1100px;
+	max-height: 80px;
+	text-align: center;
+	padding: 10px;
+	margin-top: 20px;
+}
+
+p {
+	font-size: 30px;
+	margin: 0;
 }
 
 h1 {
