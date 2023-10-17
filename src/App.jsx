@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Button } from './components/Button/Button.jsx'
 import { FormAddTask } from './components/FormAddTask/FormAddTask.jsx'
+import { ModalWindow } from './components/ModalWindow/ModalWindow.jsx'
 
 export const App = () => {
 	const [todos, setTodos] = useState([])
@@ -69,30 +70,11 @@ export const App = () => {
 	return (
 		<div className="container">
 			{isModalOpen.isOpen && (
-				<div className="modal">
-					<div className="modal-content">
-						<h2>Change Task</h2>
-						<textarea
-							className="text_area_task"
-							value={isModalOpen.taskValue}
-							onChange={(event) =>
-								setIsModalOpen({
-									...isModalOpen,
-									taskValue: event.target.value
-								})
-							}
-						/>
-						<button className="change_button_area" onClick={requestChangeTask}>
-							Save changes
-						</button>
-						<button
-							className="close-button"
-							onClick={() => setIsModalOpen({ ...isModalOpen, isOpen: false })}
-						>
-							Close window
-						</button>
-					</div>
-				</div>
+				<ModalWindow
+					isModalOpen={isModalOpen}
+					setIsModalOpen={setIsModalOpen}
+					requestChangeTask={requestChangeTask}
+				/>
 			)}
 			<h1>TODOS LIST</h1>
 			<FormAddTask
