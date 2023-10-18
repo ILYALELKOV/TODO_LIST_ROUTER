@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react'
 import { Button } from './components/Button/Button.jsx'
 import { FormAddTask } from './components/FormAddTask/FormAddTask.jsx'
 import { ModalWindow } from './components/ModalWindow/ModalWindow.jsx'
+import { SearchForm } from './components/SearchForm/SearchForm.jsx'
 
 export const App = () => {
 	const [todos, setTodos] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [inputValue, setInputValue] = useState('')
 	const [refreshTasks, setRefreshTasks] = useState(false)
+	const [searchValue, setSearchValue] = useState('')
+	const [, setDebouncedSearchTerm] = useState('')
+	const [sortedTodos, setSortedTodos] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState({
 		isOpen: false,
 		taskValue: '',
@@ -29,6 +33,16 @@ export const App = () => {
 			.catch((error) => console.warn(error))
 			.finally(() => setIsLoading(false))
 	}, [refreshTasks])
+
+	useEffect(() => {
+		const debounceTimeout = setTimeout(() => {
+			setDebouncedSearchTerm(searchValue)
+		}, 300)
+
+		return () => {
+			clearTimeout(debounceTimeout)
+		}
+	}, [searchValue])
 
 	const requestAddTask = (task) => {
 		event.preventDefault()
@@ -67,6 +81,21 @@ export const App = () => {
 		}).then(() => setRefreshTasks(!refreshTasks))
 	}
 
+	const filteredTodos = todos.filter((todo) => {
+		return todo.title.toLowerCase().includes(searchValue.toLowerCase())
+	})
+
+	const handleSortTasks = (todos) => {
+		setSortedTodos(!sortedTodos)
+
+		const sorted = [...todos].sort((a, b) => {
+			return sortedTodos
+				? b.title.localeCompare(a.title)
+				: a.title.localeCompare(b.title)
+		})
+		setTodos(sorted)
+	}
+
 	return (
 		<div className="container">
 			{isModalOpen.isOpen && (
@@ -82,10 +111,22 @@ export const App = () => {
 				setInputValue={setInputValue}
 				onClick={requestAddTask}
 			/>
+			<SearchForm
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
+				todos={todos}
+			/>
+			<Button
+				className={'sort'}
+				todos={todos}
+				onClick={() => handleSortTasks(todos)}
+			>
+				Sort todos
+			</Button>
 			{isLoading ? (
 				<div className="loading">Loading...</div>
 			) : todos.length > 0 ? (
-				todos.map((todo) => (
+				filteredTodos.map((todo) => (
 					<div key={todo.id} className="todo_container">
 						<p>{todo.title}</p>
 						<div className="button_container">
