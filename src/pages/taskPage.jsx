@@ -1,24 +1,40 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
-import { useRequestChangeTask, useRequestDeleteTask } from '../hooks/index.js'
 import { Button } from '../components/Button/Button.jsx'
+import {
+	useRequestChangeTask,
+	useRequestClickChangeTask,
+	useRequestDeleteTask
+} from '../hooks/index.js'
+import { ModalWindow } from '../components/ModalWindow/ModalWindow.jsx'
 
 export const TaskPage = () => {
-	const { id } = useParams()
+	let { id } = useParams()
 	const location = useLocation()
-	// console.log(location)
-	const { requestDeleteTask } = useRequestDeleteTask()
+
+	const { handleClickChangeTask, isModalOpen, setIsModalOpen } =
+		useRequestClickChangeTask()
 	const { requestChangeTask } = useRequestChangeTask()
+	const { requestDeleteTask } = useRequestDeleteTask()
+
 	return (
 		<div className="container_task">
+			{isModalOpen.isOpen && (
+				<ModalWindow
+					isModalOpen={isModalOpen}
+					setIsModalOpen={setIsModalOpen}
+					requestChangeTask={requestChangeTask}
+				/>
+			)}
 			<Link to="/" className="back_button">
 				Back
 			</Link>
-			<h2>This is task</h2>
-			<p className="task_text">{location.state.title}</p>
+			<div className="taskid_container">
+				<p className="task_text">{location.state.title}</p>
+			</div>
 			<div className="button_container">
 				<Button
 					className="change_button"
-					onClick={() => requestChangeTask(id, location.state.title)}
+					onClick={() => handleClickChangeTask(id, location.state.title)}
 				>
 					Change task
 				</Button>

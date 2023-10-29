@@ -1,12 +1,16 @@
 export const useRequestDeleteTask = (
 	TODO_DB,
 	setRefreshTasks,
-	refreshTasks
+	refreshTasks,
+	setTodos
 ) => {
 	const requestDeleteTask = (idTask) => {
-		fetch(`${TODO_DB}/${idTask}`, {
+		fetch(`http://localhost:3005/task/${idTask}`, {
 			method: 'DELETE'
-		}).then(() => setRefreshTasks(!refreshTasks))
+		})
+			.then(() => fetch(TODO_DB))
+			.then((data) => setTodos(data))
+			.finally(() => (window.location.href = '/'))
 	}
 
 	return {

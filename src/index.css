@@ -101,7 +101,7 @@ body {
 }
 
 .todo_container > p {
-	width: 660px;
+	width: 1050px;
 	color: #110f0d;
 	text-align: left;
 	overflow: hidden;
@@ -359,10 +359,6 @@ h2 {
 	margin-top: 50px;
 }
 
-.task_text {
-	margin-top: 100px;
-}
-
 .text_404 {
 	color: red;
 	text-transform: uppercase;
@@ -393,4 +389,21 @@ h2 {
 .home_button_container {
 	margin-top: 150px;
 	text-align: center;
+}
+
+.taskid_container {
+	padding: 30px;
+	margin: 200px auto;
+	width: 50vw;
+	height: 40vh;
+	background: #fff;
+	border-radius: 10px;
+
+
+}
+
+.task_text {
+	text-align: left;
+	height: 460px;
+	overflow-wrap: break-word
 }

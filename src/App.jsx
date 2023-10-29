@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Button } from './components/Button/Button.jsx'
 import { FormAddTask } from './components/FormAddTask/FormAddTask.jsx'
-import { ModalWindow } from './components/ModalWindow/ModalWindow.jsx'
 import { SearchForm } from './components/SearchForm/SearchForm.jsx'
 import { TodoItem } from './components/TodoItem/TodoItem.jsx'
 import { useRequestDeleteTask } from './hooks'
 import { useRequestAddTask } from './hooks'
 import { useRequestChangeTask } from './hooks'
-import { useRequestGetTasks } from './hooks'
 import { SortTasks } from './functions'
 import { FilteredTodos } from './functions'
 import { useRequestClickChangeTask } from './hooks'
 
 export const App = () => {
+	const [todos, setTodos] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [inputValue, setInputValue] = useState('')
 	const [refreshTasks, setRefreshTasks] = useState(false)
@@ -20,15 +19,15 @@ export const App = () => {
 	const [, setDebouncedSearchTerm] = useState('')
 	const [sortedTodos, setSortedTodos] = useState(false)
 
-	const TODO_DB = 'http://localhost:3005/posts'
+	const TODO_DB = 'http://localhost:3005/task'
 
-	const { handleClickChangeTask, isModalOpen, setIsModalOpen } =
-		useRequestClickChangeTask()
+	const { handleClickChangeTask, isModalOpen } = useRequestClickChangeTask()
 
 	const { requestDeleteTask } = useRequestDeleteTask(
 		TODO_DB,
 		setRefreshTasks,
-		refreshTasks
+		refreshTasks,
+		setTodos
 	)
 
 	const { requestAddTask } = useRequestAddTask(
@@ -38,22 +37,25 @@ export const App = () => {
 		setInputValue
 	)
 
-	const { requestChangeTask } = useRequestChangeTask(
-		TODO_DB,
-		isModalOpen,
-		setRefreshTasks,
-		refreshTasks
-	)
-
-	const { todos, setTodos } = useRequestGetTasks(
-		setIsLoading,
-		TODO_DB,
-		refreshTasks
-	)
+	useRequestChangeTask(TODO_DB, isModalOpen, setRefreshTasks, refreshTasks)
 
 	const { handleSortTasks } = SortTasks(setSortedTodos, sortedTodos, setTodos)
 
 	const { filteredTodos } = FilteredTodos(todos, searchValue)
+
+	useEffect(() => {
+		setIsLoading(true)
+		fetch(TODO_DB)
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error('Network error')
+				}
+				return response.json()
+			})
+			.then((data) => setTodos(data))
+			.catch((error) => console.warn(error))
+			.finally(() => setIsLoading(false))
+	}, [refreshTasks])
 
 	useEffect(() => {
 		const debounceTimeout = setTimeout(() => {
@@ -67,13 +69,6 @@ export const App = () => {
 
 	return (
 		<div className="container">
-			{isModalOpen.isOpen && (
-				<ModalWindow
-					isModalOpen={isModalOpen}
-					setIsModalOpen={setIsModalOpen}
-					requestChangeTask={requestChangeTask}
-				/>
-			)}
 			<h1>TODOS LIST</h1>
 			<FormAddTask
 				inputValue={inputValue}

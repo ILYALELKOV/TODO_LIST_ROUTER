@@ -1,7 +1,7 @@
 {
-  "posts": [
+  "task": [
     {
-      "title": "json-server1",
+      "title": "1",
       "id": 1
     },
     {
@@ -13,24 +13,12 @@
       "id": 3
     },
     {
-      "title": "Ilya lelkov",
+      "title": "4",
       "id": 4
     },
     {
-      "title": "2222222222222222222222222222222222222222222222222222222222222222222222222222222",
+      "title": "5",
       "id": 5
-    },
-    {
-      "title": "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
-      "id": 6
-    },
-    {
-      "title": "rthortnohknrtohnrohnrtohnrtohrthrtbr",
-      "id": 7
-    },
-    {
-      "title": "rthrtklbnrtlknbojklrtnbojlrtnbjklrtnblrtnblrtnblrtnblrtn",
-      "id": 8
     }
   ]
 }
