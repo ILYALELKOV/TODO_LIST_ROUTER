@@ -393,17 +393,30 @@ h2 {
 
 .taskid_container {
 	padding: 30px;
-	margin: 200px auto;
+	margin: 150px auto;
 	width: 50vw;
 	height: 40vh;
 	background: #fff;
 	border-radius: 10px;
-
-
 }
 
 .task_text {
 	text-align: left;
 	height: 460px;
 	overflow-wrap: break-word
+}
+
+.button_container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.change_button {
+	height: 60px;
+	width: 300px;
+}
+
+.delete_button {
+	height: 60px;
+	width: 300px;
 }

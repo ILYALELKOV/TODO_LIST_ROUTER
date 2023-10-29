@@ -1,8 +1,7 @@
-import { Button } from '../Button/Button.jsx'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
-export const TodoItem = ({ todo, onClickChange, onClickDelete }) => {
+export const TodoItem = ({ todo }) => {
 	const navigate = useNavigate()
 
 	const handleTaskClick = (todoId, text) => {
@@ -17,21 +16,6 @@ export const TodoItem = ({ todo, onClickChange, onClickDelete }) => {
 			>
 				{todo.title}
 			</p>
-			{/*<div className="button_container">*/}
-			{/*	<Button*/}
-			{/*		className="change_button"*/}
-			{/*		onClick={() => onClickChange(todo.id, todo.title)}*/}
-			{/*	>*/}
-			{/*		Change task*/}
-			{/*	</Button>*/}
-			{/*	<Button*/}
-			{/*		className="delete_button"*/}
-			{/*		onClick={() => onClickDelete(todo.id)}*/}
-			{/*		inputValue={todo.id}*/}
-			{/*	>*/}
-			{/*		Delete task*/}
-			{/*	</Button>*/}
-			{/*</div>*/}
 		</div>
 	)
 }

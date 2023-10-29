@@ -5,7 +5,6 @@ import { SearchForm } from './components/SearchForm/SearchForm.jsx'
 import { TodoItem } from './components/TodoItem/TodoItem.jsx'
 import { useRequestDeleteTask } from './hooks'
 import { useRequestAddTask } from './hooks'
-import { useRequestChangeTask } from './hooks'
 import { SortTasks } from './functions'
 import { FilteredTodos } from './functions'
 import { useRequestClickChangeTask } from './hooks'
@@ -21,7 +20,7 @@ export const App = () => {
 
 	const TODO_DB = 'http://localhost:3005/task'
 
-	const { handleClickChangeTask, isModalOpen } = useRequestClickChangeTask()
+	const { handleClickChangeTask } = useRequestClickChangeTask()
 
 	const { requestDeleteTask } = useRequestDeleteTask(
 		TODO_DB,
@@ -36,8 +35,6 @@ export const App = () => {
 		refreshTasks,
 		setInputValue
 	)
-
-	useRequestChangeTask(TODO_DB, isModalOpen, setRefreshTasks, refreshTasks)
 
 	const { handleSortTasks } = SortTasks(setSortedTodos, sortedTodos, setTodos)
 

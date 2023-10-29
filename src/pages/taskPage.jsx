@@ -13,7 +13,7 @@ export const TaskPage = () => {
 
 	const { handleClickChangeTask, isModalOpen, setIsModalOpen } =
 		useRequestClickChangeTask()
-	const { requestChangeTask } = useRequestChangeTask()
+	const { requestChangeTask } = useRequestChangeTask(isModalOpen)
 	const { requestDeleteTask } = useRequestDeleteTask()
 
 	return (

@@ -19,7 +19,10 @@ export const ModalWindow = ({
 						})
 					}
 				/>
-				<button className="change_button_area" onClick={requestChangeTask}>
+				<button
+					className="change_button_area"
+					onClick={() => requestChangeTask(isModalOpen)}
+				>
 					Save changes
 				</button>
 				<button
