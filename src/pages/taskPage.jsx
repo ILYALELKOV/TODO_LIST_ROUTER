@@ -6,17 +6,19 @@ import {
 	useRequestDeleteTask
 } from '../hooks/index.js'
 import { ModalWindow } from '../components/ModalWindow/ModalWindow.jsx'
+import { Page_404 } from './page_404.jsx'
 
 export const TaskPage = () => {
 	let { id } = useParams()
 	const location = useLocation()
-
 	const { handleClickChangeTask, isModalOpen, setIsModalOpen } =
 		useRequestClickChangeTask()
 	const { requestChangeTask } = useRequestChangeTask(isModalOpen)
 	const { requestDeleteTask } = useRequestDeleteTask()
 
-	return (
+	return !location.state || !location.state.title ? (
+		<Page_404 />
+	) : (
 		<div className="container_task">
 			{isModalOpen.isOpen && (
 				<ModalWindow

@@ -4,8 +4,12 @@ import { useNavigate } from 'react-router-dom'
 export const TodoItem = ({ todo }) => {
 	const navigate = useNavigate()
 
+	// const handleTaskClick = (todoId, text) => {
+	// 	navigate(`/task/${todoId}`, { state: { title: text } })
+	// }
+
 	const handleTaskClick = (todoId, text) => {
-		navigate(`/task/${todoId}`, { state: { title: text } })
+		navigate(`/task/${todoId}`, { state: { title: text, state: todo } })
 	}
 
 	return (

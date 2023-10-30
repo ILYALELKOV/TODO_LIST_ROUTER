@@ -387,13 +387,13 @@ h2 {
 }
 
 .home_button_container {
-	margin-top: 150px;
+	/*margin-top: 50px;*/
 	text-align: center;
 }
 
 .taskid_container {
 	padding: 30px;
-	margin: 150px auto;
+	margin: 100px auto;
 	width: 50vw;
 	height: 40vh;
 	background: #fff;
@@ -420,3 +420,6 @@ h2 {
 	height: 60px;
 	width: 300px;
 }
+
+
+

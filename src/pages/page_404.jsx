@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export const Page_404 = () => {
 	return (
-		<div>
+		<div className="error_page_container">
 			<img src="../../public/error_404.png" alt="" />
 			<h1 className="text_404">Sorry, this page does not exist</h1>
 			<div className="home_button_container">
